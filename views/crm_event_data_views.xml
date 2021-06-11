@@ -1,0 +1,32 @@
+<odoo>
+
+    <record id="crm_event_data_action" model="ir.actions.act_window">
+        <field name="name">CRM Event Data</field>
+        <field name="res_model">crm.event.data</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="crm_event_data_menu"
+              name="CRM Event Data"
+              action="crm_event_data.crm_event_data_action"
+              parent="crm.crm_menu_root"
+              sequence="30"/>
+
+    <record id="crm_event_data_tree_view" model="ir.ui.view">
+        <field name="name">crm.event.data.tree</field>
+        <field name="model">crm.event.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="event_data_id" string="System event" widget="many2one"/>
+                <field name="create_uid" string="Creator"/>
+                <field name="old_user_id" string="Old User"/>
+                <field name="new_user_id" string="New User"/>
+                <field name="old_stage_id" string="Old Stage"/>
+                <field name="new_stage_id" string="New Stage"/>
+                <field name="create_date" string="Creation date"/>
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>
