@@ -25,16 +25,19 @@ class Lead(models.Model):
         return res
 
     def write(self, vals):
+        old_user = self.user_id.id
+        old_stage = self.stage_id.id
+        res = super(Lead, self).write(vals)
         changes = {}
         crm_lead_data = self.env['crm.event.data'].sudo()
         if 'user_id' in vals:
-            changes['old_user_id'] = self.user_id.id
+            changes['old_user_id'] = old_user
             changes['new_user_id'] = vals['user_id']
         if 'stage_id' in vals:
-            changes['old_stage_id'] = self.stage_id.id
+            changes['old_stage_id'] = old_stage
             changes['new_stage_id'] = vals['stage_id']
         if changes:
             changes['event_data_id'] = self.env['system.event'].id
             crm_lead_data.create(changes)
 
-        return super(Lead, self).write(vals)
+        return res
